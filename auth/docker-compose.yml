@@ -7,21 +7,8 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: mydatabase
-      POSTGRES_USER: dev_mikun
-      POSTGRES_PASSWORD: testpassword
+      POSTGRES_DB: bookwormdevdb
+      POSTGRES_USER: devmikun
+      POSTGRES_PASSWORD: pwd
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-  
-  aws-local:
-    container_name: aws_local_container
-    environment:
-      - DEBUG=0
-      - AWS_DEFAULT_REGION=us-east-1
-      - DOCKER_HOST=unix:///var/run/docker.sock
-      - DISABLE_CORS_CHECKS=1
-    image: localstack/localstack:latest
-    ports:
-      - "4566:4566"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock

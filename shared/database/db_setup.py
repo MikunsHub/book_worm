@@ -1,3 +1,4 @@
+from functools import wraps
 from typing import NamedTuple
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -11,7 +12,7 @@ class DatabaseConfig(NamedTuple):
     password: str
     host: str
     database: str
-    port: int
+    port: str
 
 
 class DatabaseSessionManager:
@@ -34,3 +35,11 @@ class DatabaseSessionManager:
             raise
         finally:
             session.close()
+    
+    def session_decorator(self, func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            with self.in_session() as session:
+                kwargs['session'] = session
+                return func(*args, **kwargs)
+        return wrapper
