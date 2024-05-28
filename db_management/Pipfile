@@ -1,0 +1,26 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+mypy = "*"
+ruff = "*"
+
+[packages]
+sqlalchemy = "*"
+alembic = "*"
+psycopg2-binary = "*"
+
+[requires]
+python_version = "3.11"
+
+[scripts]
+alembic_init = "alembic init migrations"
+revision = "alembic revision -m"
+head = "alembic upgrade head"
+upgrade = "alembic upgrade +1"
+downgrade = "alembic downgrade -1"
+ruff = "ruff check ."
+ruff-fix = "ruff check --fix ."
+ruff-format = "ruff format ."
