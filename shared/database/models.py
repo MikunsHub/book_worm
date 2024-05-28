@@ -2,7 +2,10 @@ from sqlalchemy import Column, text
 from sqlalchemy.dialects.postgresql import BOOLEAN, INTEGER, TIMESTAMP, VARCHAR
 from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+from .utils import BaseMixin
+
+
+Base = declarative_base(cls=BaseMixin)
 
 
 class User(Base):
